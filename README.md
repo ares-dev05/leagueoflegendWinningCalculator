@@ -18,6 +18,10 @@ password: LeXuqMIbJBgsujrQ
 # How to use the API
 All heroes have their id number. For example, Hero "Annie" has unique number 1. And in the team, each hero has to have the role. For example, Top Jungle Middle Bottom Support. When you call the API, you have to input the config, team, enemy param. Here is the example input. In team or enemy, first param is role and next param is Hero unique number.
 
+- API: http://127.0.0.1:4040/analyze_draft
+Type: POST
+In Postman, you can add the follow params in raw/Body.
+
 {
     "config": {
         "ignoreChampionWinrates": false,
@@ -69,3 +73,11 @@ All heroes have their id number. For example, Hero "Annie" has unique number 1. 
         ]
     ]
 }
+
+- API: http://127.0.0.1:4040/save/current-patch
+  Type: GET
+  Description: Fetch the recent patch data.
+
+- API: http://127.0.0.1:4040/history
+  Type: GET
+  Description: Get the matched history.

@@ -5,8 +5,6 @@ from ..packages.core import Role, analyze_draft
 from .utils import save_to_file, load_from_file
 from ..database.core import save_draft_analysis, load_all_data
 
-DATASET_VERSION = "4"
-
 main = Blueprint('main', __name__)
 
 @main.route('/')
