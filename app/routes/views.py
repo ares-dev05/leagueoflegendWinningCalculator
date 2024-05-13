@@ -3,6 +3,7 @@ import http.client
 import json
 from ..packages.core import Role, analyze_draft
 from .utils import save_to_file, load_from_file
+from ..database.core import save_draft_analysis, load_all_data
 
 DATASET_VERSION = "4"
 
@@ -46,6 +47,17 @@ def fetch_dataset(name):
     finally:
         conn.close()
 
+@main.route('/history')
+def load_match_history():
+    data = load_all_data()
+
+    if data is not None:
+        for document in data:
+            document['_id'] = str(document['_id'])
+        return jsonify(data) 
+    else:
+        return "Data not found", 404
+
 @main.route('/analyze_draft', methods=['GET', 'POST'])
 def analyze_draft_route():
     # Assuming you're receiving the data as JSON
@@ -62,6 +74,8 @@ def analyze_draft_route():
 
     # Call the analyze_draft function with processed data
     result = analyze_draft(dataset, fullDataset, team, enemy, config)
+
+    save_draft_analysis(data['team'], data['enemy'], config, result);
 
     # Return the result as JSON
     return jsonify(result)
